@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def convert_to_cents
     currency = SUPPORTED_CURRENCIES.select { |c| c[:title] == params[:currency] }.first
     if currency
-      @calculated_cents = (params[:amount].to_f * currency[:cent_multiplier]).round(0)
+      @calculated_cents = (params[:amount].to_f * currency[:cent_multiplier]).round(0).to_s(:delimited)
     else
     end
   end
