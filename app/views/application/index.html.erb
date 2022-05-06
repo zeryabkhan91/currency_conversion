@@ -1,0 +1,23 @@
+<p>
+  Here is our currency conversion, please use Dot (.) as decimal point.
+  <br />
+  Our system will use comma (,) after every 3 digit to make the large numbers more readable
+</p>
+<%= form_tag convert_to_cents_path, remote: true do |f| %>
+  <label for="amount">Amount: </label>
+  <%= number_field_tag :amount, nil, min: 0, step: 0.01 %>
+
+  <br />
+  <br />
+
+  <label for="currency">Currency: </label>
+  <%= select_tag :currency, options_for_select(@currnecies), include_blank: true %>
+
+  <br />
+  <br />
+  <%= submit_tag "Calculate" %>
+<% end %>
+
+<br />
+<label for="cents">Cents: </label>
+<label id="calculated_cents"></label>
