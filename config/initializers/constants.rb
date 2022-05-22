@@ -4,12 +4,12 @@ SUPPORTED_CURRENCIES = [
     cent_multiplier: 100
   },
   {
-    title: 'EURO',
+    title: 'EUR',
     cent_multiplier: 100
   },
   {
     title: 'JPY',
-    cent_multiplier: 100
+    cent_multiplier: 1
   },
   {
     title: 'GBP',
@@ -24,3 +24,5 @@ SUPPORTED_CURRENCIES = [
     cent_multiplier: 100
   },
 ]
+
+SUPPORTED_CURRENCIES_FOR_CONVERSION = ['USD', 'JPY', 'COP']

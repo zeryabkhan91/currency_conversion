@@ -1,9 +1,14 @@
+<h2>Conver to Cents</h2>
+
 <p>
   Here is our currency conversion, please use Dot (.) as decimal point.
   <br />
   Our system will use comma (,) after every 3 digit to make the large numbers more readable
 </p>
+
 <%= form_tag convert_to_cents_path, remote: true do |f| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
   <label for="amount">Amount: </label>
   <%= number_field_tag :amount, nil, min: 0, step: 0.01 %>
 
@@ -21,3 +26,51 @@
 <br />
 <label for="cents">Cents: </label>
 <label id="calculated_cents"></label>
+
+<h2>Currency Conversion</h2>
+
+<%= form_for CurrencyConversionHistory.new do |f| %>
+  <%= f.label :currency %>
+  <%= f.select :source_currency, options_for_select(SUPPORTED_CURRENCIES_FOR_CONVERSION) %>
+
+  <br />
+  <br />
+
+  <%= f.label :amount %>
+  <%= f.number_field :source_currency_value %>
+
+  <br />
+  <br />
+
+  <%= f.label :convert_to %>
+  <%= f.select :converted_curreny, options_for_select(SUPPORTED_CURRENCIES_FOR_CONVERSION) %>
+
+  <br />
+  <br />
+
+  <%= f.submit 'convert' %>
+<% end %>
+
+<h3>Currency Conversion Histories</h3>
+<div>
+  <table>
+  <thead>
+    <th>Source Currency</th>
+    <th>Amount</th>
+    <th>Destination Currency</th>
+    <th>Converted Amount</th>
+  </thead>
+  <tbody>
+    <% CurrencyConversionHistory.all.each do |history| %>
+      <tr>
+        <td><%= history.source_currency %></td>
+        <td><%= history.source_currency_value %></td>
+        <td><%= history.converted_curreny %></td>
+        <td><%= history.converted_currency_value %></td>
+        <td><%= link_to "delete", currency_conversion_history_path(history), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
