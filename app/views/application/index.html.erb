@@ -64,9 +64,9 @@
     <% CurrencyConversionHistory.all.each do |history| %>
       <tr>
         <td><%= history.source_currency %></td>
-        <td><%= history.source_currency_value %></td>
+        <td><%= history.source_currency_value.round(2).to_s(:delimited) %></td>
         <td><%= history.converted_curreny %></td>
-        <td><%= history.converted_currency_value %></td>
+        <td><%= history.converted_currency_value.round(2).to_s(:delimited) %></td>
         <td><%= link_to "delete", currency_conversion_history_path(history), method: :delete %></td>
       </tr>
     <% end %>

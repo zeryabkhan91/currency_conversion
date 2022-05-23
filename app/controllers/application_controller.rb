@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     if currency
       @calculated_cents = (params[:amount].to_f * currency[:cent_multiplier]).round(0).to_s(:delimited)
     end
-    @currency_conversion_history = CurrencyConversionHistory.new
     respond_to do |format|
       format.js
     end
